@@ -1,0 +1,2 @@
+C:/Users/User/3D Objects/Graduation project/ev_power/android/app/.cxx/Debug/1s2v513d/x86/CMakeFiles/edit_cache.dir
+C:/Users/User/3D Objects/Graduation project/ev_power/android/app/.cxx/Debug/1s2v513d/x86/CMakeFiles/rebuild_cache.dir
