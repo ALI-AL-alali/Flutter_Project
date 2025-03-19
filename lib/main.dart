@@ -10,8 +10,8 @@ import 'package:ev_power/screen/select_car_screen.dart';
 import 'package:ev_power/screen/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:get/get.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           'select_car_screen': (context) => const SelectcarScreen(),
           'account_screen': (context) => const AccountScreen(),
           'forget_password_screen': (context) => const ForgetPasswordScreen(),
-          'verify_screen': (context) => const VerifyScreen(),
+          // 'verify_screen': (context) => const VerifyScreen(),
         });
   }
 }
