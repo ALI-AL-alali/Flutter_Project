@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Mycard extends StatelessWidget {
-  Mycard(this.text, this.image, this.f);
+  const Mycard(this.text, this.image, this.f, {super.key});
   final String text;
   final String image;
   final VoidCallback f;
   @override
   Widget build(BuildContext context) {
-    return InkWell(onTap: f,
+    return InkWell(
+      onTap: f,
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(boxShadow: const [
           BoxShadow(offset: Offset(0, 17), blurRadius: 20, spreadRadius: -24)
         ], color: Colors.white, borderRadius: BorderRadius.circular(13)),
         child: Column(
           children: <Widget>[
-            Spacer(),
+            const Spacer(),
             Lottie.asset(image),
-            Spacer(),
+            const Spacer(),
             Text(
               text,
               textAlign: TextAlign.center,

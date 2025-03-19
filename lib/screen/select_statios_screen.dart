@@ -1,17 +1,20 @@
 import 'package:ev_power/widgets/station_card.dart';
 import 'package:flutter/material.dart';
 
-class SelectcarScren extends StatelessWidget {
-  const SelectcarScren({super.key});
-
+// ignore: must_be_immutable
+class SelectStatiosScreen extends StatelessWidget {
+  SelectStatiosScreen({super.key});
+  List<dynamic> l = ['معلومات', () {}, ''];
   @override
   Widget build(BuildContext context) {
+    final currenwidth = MediaQuery.of(context).size.width;
+    final currenheight = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Container(height: 10, child: Image.asset('images/ev.png')),
+            child: SizedBox(height: 10, child: Image.asset('images/ev.png')),
           ),
           centerTitle: true,
           title: const Text(
@@ -27,7 +30,7 @@ class SelectcarScren extends StatelessWidget {
             child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: const Color.fromARGB(255, 0, 127, 230),
+                  color: Color.fromARGB(255, 0, 127, 230),
                 ),
                 child: Column(children: [
                   Expanded(
@@ -43,19 +46,20 @@ class SelectcarScren extends StatelessWidget {
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 3,
+                              itemCount: 4,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  margin: EdgeInsets.only(bottom: 40),
+                                  margin: const EdgeInsets.only(bottom: 10),
                                   width: 200,
                                   height: 200,
-                                  child: StationCard(
-                                      'رقم السيارة  ',
-                                      ' 225175 ',
-                                      () {},
-                                      Color.fromARGB(255, 164, 183, 199),
-                                      Color.fromARGB(255, 218, 103, 50),
-                                      'asset/car.json'),
+                                  child: StationCard('محطة الشحن السريع',
+                                      'الرياض، حي المالكات', () {
+                                    Navigator.pushNamed(context, 'station');
+                                  },
+                                      const Color.fromARGB(255, 0, 127, 230),
+                                      const Color.fromARGB(255, 51, 192, 8),
+                                      'asset/caronstret.json',
+                                      currenwidth < 370 ? 160 : 200),
                                 );
                               },
                             ),

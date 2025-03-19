@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MyButton2 extends StatelessWidget {
-  MyButton2({super.key, required this.Title, required this.color, required this.onPressed});
+  const MyButton2(
+      {super.key,
+      // ignore: non_constant_identifier_names
+      required this.Title,
+      required this.color,
+      required this.onPressed});
+  // ignore: non_constant_identifier_names
   final String Title;
   final Color color;
-  final VoidCallback  onPressed;
-  
+  final VoidCallback onPressed;
+
   @override
   Widget build(BuildContext context) {
     return MaterialButton(

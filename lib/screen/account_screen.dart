@@ -1,24 +1,24 @@
-import 'package:ev_power/widgets/MyButton2.dart';
+import 'package:ev_power/widgets/mybutton2.dart';
 import 'package:ev_power/widgets/input2.dart';
 import 'package:flutter/material.dart';
 
-class AccountScren extends StatelessWidget {
-  const AccountScren({super.key});
+class AccountScreen extends StatelessWidget {
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _username = TextEditingController();
-    final TextEditingController _phone_number = TextEditingController();
-    final TextEditingController _password = TextEditingController();
-    final TextEditingController _passwordnew = TextEditingController();
-    final TextEditingController _confirmPassword = TextEditingController();
+    final TextEditingController username = TextEditingController();
+    final TextEditingController phoneNumber = TextEditingController();
+    final TextEditingController password = TextEditingController();
+    final TextEditingController passwordnew = TextEditingController();
+    final TextEditingController confirmPassword = TextEditingController();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Container(
+          child: SizedBox(
             height: 10,
             child: Image.asset('images/ev.png'),
           ),
@@ -37,10 +37,9 @@ class AccountScren extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // القسم الأول: صورة ونص
             Column(
               children: [
-                Container(
+                SizedBox(
                   height: 260,
                   child: Image.asset('images/icon1.png'),
                 ),
@@ -54,8 +53,6 @@ class AccountScren extends StatelessWidget {
                 ),
               ],
             ),
-
-            // القسم الثاني: النموذج
             Container(
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -72,9 +69,9 @@ class AccountScren extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const SizedBox(height: 20),
-                    input2(
+                    Input2(
                       title: 'الاسم الكامل',
-                      controller: _username,
+                      controller: username,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'يرجى إدخال الاسم ';
@@ -83,10 +80,10 @@ class AccountScren extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 20),
-                    input2(
+                    Input2(
                       title: 'رقم الهاتف',
-                      controller: _phone_number,
-                      obscureText: true,
+                      controller: phoneNumber,
+                      keyboardType: TextInputType.phone,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'يرجى إدخال رقم الهاتف';
@@ -95,23 +92,9 @@ class AccountScren extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 20),
-                    input2(
+                    Input2(
                       title: 'كلمة السر الحالية',
-                      controller: _password,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'يرجى إدخال كلمة المرور';
-                        }
-                        if (value.length < 8) {
-                          return 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    input2(
-                      title: 'كلمة السر الجديدة',
-                      controller: _passwordnew,
+                      controller: password,
                       obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -124,15 +107,30 @@ class AccountScren extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 20),
-                    input2(
+                    Input2(
                       title: 'كلمة السر الجديدة',
-                      controller: _confirmPassword,
+                      controller: passwordnew,
                       obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'يرجى إدخال كلمة المرور';
                         }
-                        if (value != _passwordnew.text) {
+                        if (value.length < 8) {
+                          return 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    Input2(
+                      title: 'كلمة السر الجديدة',
+                      controller: confirmPassword,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'يرجى إدخال كلمة المرور';
+                        }
+                        if (value != passwordnew.text) {
                           return 'كلمة السر غير مطتابقة مع الكلمة الجديدة';
                         }
                         return null;
@@ -144,7 +142,7 @@ class AccountScren extends StatelessWidget {
                       color: Colors.blue,
                       onPressed: () {
                         // إضافة وظيفة لتغيير كلمة المرور هنا
-                        Navigator.pushNamed(context, 'user_scren');
+                        Navigator.pushNamed(context, 'user_screen');
                       },
                     ),
                     const SizedBox(height: 20),

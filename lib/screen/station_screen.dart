@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Station_scren extends StatefulWidget {
+class StationScreen extends StatefulWidget {
+  const StationScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ChargingStationPageState createState() => _ChargingStationPageState();
 }
 
-class _ChargingStationPageState extends State<Station_scren> {
+class _ChargingStationPageState extends State<StationScreen> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   List<String> timeSlots = [
@@ -22,41 +25,43 @@ class _ChargingStationPageState extends State<Station_scren> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 30)),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(height: 10, child: Image.asset('images/ev.png')),
-          ),
-          centerTitle: true,
-          title: const Text(
-            'EV_POWER',
-            style: TextStyle(
-                color: Color.fromARGB(255, 231, 222, 222),
-                fontSize: 30,
-                fontWeight: FontWeight.w400),
-          ),
-          backgroundColor: const Color.fromARGB(255, 0, 127, 230),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SizedBox(height: 10, child: Image.asset('images/ev.png')),
         ),
-      body: Container( width: double.infinity,
+        centerTitle: true,
+        title: const Text(
+          'EV_POWER',
+          style: TextStyle(
+              color: Color.fromARGB(255, 231, 222, 222),
+              fontSize: 30,
+              fontWeight: FontWeight.w400),
+        ),
+        backgroundColor: const Color.fromARGB(255, 0, 127, 230),
+      ),
+      body: Container(
+        width: double.infinity,
         decoration: const BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
           Color.fromARGB(255, 0, 127, 230),
           Color.fromARGB(255, 51, 192, 8),
         ])),
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -65,11 +70,18 @@ class _ChargingStationPageState extends State<Station_scren> {
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  
-                ),child: Container(width: double.infinity,child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.asset('images/station3.jpg',fit: BoxFit.cover,))),
+                ),
+                child: SizedBox(
+                    width: double.infinity,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          'images/station3.jpg',
+                          fit: BoxFit.cover,
+                        ))),
               ),
-              SizedBox(height: 20),
-        
+              const SizedBox(height: 20),
+
               // معلومات المحطة
               const Card(
                 child: Padding(
@@ -104,19 +116,19 @@ class _ChargingStationPageState extends State<Station_scren> {
                   ),
                 ),
               ),
-        
+
               // اختيار التاريخ
               Card(
                 child: ListTile(
-                  title: Text('اختر تاريخ الحجز'),
-                  subtitle: Text(selectedDate != null 
+                  title: const Text('اختر تاريخ الحجز'),
+                  subtitle: Text(selectedDate != null
                       ? DateFormat('yyyy-MM-dd').format(selectedDate!)
                       : 'لم يتم اختيار تاريخ'),
-                  trailing: Icon(Icons.calendar_today),
+                  trailing: const Icon(Icons.calendar_today),
                   onTap: () => _selectDate(context),
                 ),
               ),
-        
+
               // اختيار الوقت
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -155,7 +167,7 @@ class _ChargingStationPageState extends State<Station_scren> {
                   );
                 },
               ),
-        
+
               // زر الحجز
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -163,7 +175,7 @@ class _ChargingStationPageState extends State<Station_scren> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                       backgroundColor: const Color.fromARGB(255, 0, 127, 230),
                     ),
                     onPressed: () {
@@ -173,7 +185,7 @@ class _ChargingStationPageState extends State<Station_scren> {
                     },
                     child: const Text(
                       'تأكيد الحجز',
-                      style: TextStyle(fontSize: 18,color: Colors.white),
+                      style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),

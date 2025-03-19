@@ -1,23 +1,33 @@
-import 'package:ev_power/screen/Select_Statios_scren.dart';
-import 'package:ev_power/screen/Station_scren.dart';
-import 'package:ev_power/screen/account_scren.dart';
-import 'package:ev_power/screen/register_screen.dart';
-import 'package:ev_power/screen/creatCar_scren.dart';
-import 'package:ev_power/screen/login_screen.dart';
-import 'package:ev_power/screen/selectcar_scren.dart';
+import 'package:ev_power/screen/auth/forget_password_screen.dart';
+import 'package:ev_power/screen/auth/verify_screen.dart';
+import 'package:ev_power/screen/select_statios_screen.dart';
+import 'package:ev_power/screen/station_screen.dart';
+import 'package:ev_power/screen/account_screen.dart';
+import 'package:ev_power/screen/auth/register_screen.dart';
+import 'package:ev_power/screen/create_car_screen.dart';
+import 'package:ev_power/screen/auth/login_screen.dart';
+import 'package:ev_power/screen/select_car_screen.dart';
 import 'package:ev_power/screen/user_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token');
+    runApp(MyApp(token: token));
+  });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? token;
+  const MyApp({super.key, this.token});
 
-  
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -28,16 +38,18 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //
-        initialRoute: 'login_screen',
+        initialRoute: token == null ? 'login_screen' : 'user_screen',
         routes: {
           'login_screen': (context) => const LoginScreen(),
-          'user_scren': (context) => const UserScreen(),
-          'station': (context) => Station_scren(),
-          'register_screen': (context) => RegisterScreen(),
-          'Select_Stations_scren': (context) => SelectStatiosScren(),
-          'CREATCAR_SCREN':(context) => const CreatcarScren(),
-          'account_scren':(context) =>const AccountScren(),
-          'selectcar_scren':(context) =>const SelectcarScren()
+          'register_screen': (context) => const RegisterScreen(),
+          'user_screen': (context) => const UserScreen(),
+          'stationscreen': (context) => const StationScreen(),
+          'select_stations_screen': (context) => SelectStatiosScreen(),
+          'create_car_screen': (context) => const CreatCarScreen(),
+          'select_car_screen': (context) => const SelectcarScreen(),
+          'account_screen': (context) => const AccountScreen(),
+          'forget_password_screen': (context) => const ForgetPasswordScreen(),
+          'verify_screen': (context) => const VerifyScreen(),
         });
   }
 }

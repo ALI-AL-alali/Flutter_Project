@@ -4,9 +4,8 @@
 // import 'package:get/get_connect/http/src/utils/utils.dart';
 // import 'package:lottie/lottie.dart';
 
-
-// class HomeScren extends StatelessWidget {
-//   const HomeScren({super.key});
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({super.key});
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@
 //             height: 10,
 //           ),
 //           MyButton(Colors.green, 'register', () {
-//             Navigator.pushNamed(context, 'user_scren');
+//             Navigator.pushNamed(context, 'user_screen');
 //           }),
 //         ],
 //       ),

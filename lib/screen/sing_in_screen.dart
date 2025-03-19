@@ -5,14 +5,14 @@
 // import 'package:get/get_core/src/get_main.dart';
 
 // import 'package:lottie/lottie.dart';
-// class SingInScren extends StatefulWidget {
-//   const SingInScren({super.key});
+// class SingInScreen extends StatefulWidget {
+//   const SingInScreen({super.key});
 
 //   @override
-//   State<SingInScren> createState() => _SingInScrenState();
+//   State<SingInScreen> createState() => _SingInScreenState();
 // }
 
-// class _SingInScrenState extends State<SingInScren> {
+// class _SingInScreenState extends State<SingInScren> {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
