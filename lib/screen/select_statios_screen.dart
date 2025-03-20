@@ -1,3 +1,4 @@
+import 'package:ev_power/widgets/card.dart';
 import 'package:ev_power/widgets/station_card.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +25,13 @@ class SelectStatiosScreen extends StatelessWidget {
                 fontSize: 30,
                 fontWeight: FontWeight.w400),
           ),
-          backgroundColor: const Color.fromARGB(255, 0, 127, 230),
+          backgroundColor: Colors.indigo,
         ),
         body: Expanded(
             child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 0, 127, 230),
+                  color: Colors.indigo,
                 ),
                 child: Column(children: [
                   Expanded(
@@ -48,20 +49,31 @@ class SelectStatiosScreen extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: 4,
                               itemBuilder: (context, index) {
-                                return Container(
-                                  margin: const EdgeInsets.only(bottom: 10),
-                                  width: 200,
-                                  height: 200,
-                                  child: StationCard('محطة الشحن السريع',
-                                      'الرياض، حي المالكات', () {
-                                    Navigator.pushNamed(context, 'station');
+                                return Card2(
+                                  text: 'محطة الشحن السريع',
+                                  asset: "images/station3.jpg",
+                                  f: () {
+                                    Navigator.pushNamed(context, 'stationscreen');
                                   },
-                                      const Color.fromARGB(255, 0, 127, 230),
-                                      const Color.fromARGB(255, 51, 192, 8),
-                                      'asset/caronstret.json',
-                                      currenwidth < 370 ? 160 : 200),
+                                  color1: Colors.indigoAccent,
+                                  color2: Colors.black,
+                                  suptitle: 'الرياض، حي المالكات',
+                                  anmaition: false,
                                 );
                               },
+                              // Container(
+                              //     margin: const EdgeInsets.only(bottom: 10),
+                              //     width: 200,
+                              //     height: 200,
+                              //     child: StationCard('محطة الشحن السريع',
+                              //         'الرياض، حي المالكات', () {
+                              //       Navigator.pushNamed(context, 'station');
+                              //     },
+                              //         const Color.fromARGB(255, 0, 127, 230),
+                              //         const Color.fromARGB(255, 51, 192, 8),
+                              //         'asset/caronstret.json',
+                              //         currenwidth < 370 ? 160 : 200),
+                              //   );
                             ),
                           ),
                         ])),

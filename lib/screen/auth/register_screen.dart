@@ -3,6 +3,7 @@ import 'package:ev_power/Services/auth_api.dart';
 import 'package:ev_power/widgets/input.dart';
 import 'package:ev_power/widgets/mybutton2.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -100,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 127, 230),
+        backgroundColor:Colors.indigo,
       ),
       body: WillPopScope(
         onWillPop: _onBackPressed,
@@ -108,10 +109,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           width: double.infinity,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
+              begin: Alignment.topRight,
               colors: [
-                Color.fromARGB(255, 0, 127, 230),
-                Color.fromARGB(255, 51, 192, 8),
+                Colors.indigo,
+              const Color.fromARGB(255, 0, 127, 230)
               ],
             ),
           ),
@@ -122,8 +123,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Column(
                   children: [
                     SizedBox(
-                      height: 200,
-                      child: Image.asset('images/icon2.png'),
+                      height: 250,
+                      child: Lottie.asset('asset/user.json'),
                     ),
                     const Text(
                       'هيا نبدأ بإنشاء حسابك',
@@ -228,7 +229,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Title: _isLoading
                                     ? 'جاري التحميل...'
                                     : 'تسجيل الدخول',
-                                color: const Color.fromARGB(255, 0, 127, 230),
+                                color:Colors.indigo,
                                 onPressed: _register),
                             if (_isLoading)
                               const Padding(

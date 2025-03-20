@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:location/location.dart';
+import 'package:http/http.dart' as http;
 
 class StationScreen extends StatefulWidget {
   const StationScreen({super.key});
@@ -34,6 +41,104 @@ class _ChargingStationPageState extends State<StationScreen> {
     }
   }
 
+//map
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+  bool state = false;
+
+  late LatLng location_station;
+
+  //map
+  final MapController mapController = MapController();
+  LocationData? currentlocation;
+  List<LatLng> routpoints = [];
+  List<Marker> markers = [];
+
+  final String orsApiKey =
+      '5b3ce3597851110001cf6248cef75b93fc964e608ef110a0b7e38006';
+  @override
+  void initState() {
+    getcurrentlocation();
+    super.initState();
+  }
+
+  Future<void> getcurrentlocation() async {
+    var location = Location();
+    try {
+      var userloaction = await location.getLocation();
+      setState(() {
+        currentlocation = userloaction;
+        markers.add(Marker(
+            width: 80.0,
+            height: 80.0,
+            point: LatLng(userloaction.latitude!, userloaction.longitude!),
+            child: const Icon(
+              Icons.my_location,
+              color: Colors.blue,
+              size: 40.0,
+            )));
+      });
+    } on Exception {
+      currentlocation = null;
+    }
+    location.onLocationChanged.listen((LocationData newlocation) {
+      setState(() {
+        currentlocation = newlocation;
+      });
+    });
+  }
+
+  Future<void> getroute(LatLng destination) async {
+    if (currentlocation == null) return;
+
+    final start =
+        LatLng(currentlocation!.latitude!, currentlocation!.longitude!);
+    final response = await http.get(
+      Uri.parse(
+          'https://api.openrouteservice.org/v2/directions/driving-car?api_key=$orsApiKey&start=${start.longitude},${start.latitude}&end=${destination.longitude},${destination.latitude}'),
+    );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> coords =
+          data['features'][0]['geometry']['coordinates'];
+      setState(() {
+        routpoints = coords.map((coord) => LatLng(coord[1], coord[0])).toList();
+        markers.add(
+          Marker(
+            width: 80.0,
+            height: 80.0,
+            point: destination,
+            child: const Icon(Icons.location_on, color: Colors.red, size: 40.0),
+          ),
+        );
+      });
+    } else {
+      // Handle errors
+      print('Failed to fetch route');
+    }
+  }
+
+  LatLng _addDestinationMarker(LatLng point) {
+    setState(() {
+      markers.clear();
+
+      markers.add(
+        Marker(
+          width: 80.0,
+          height: 80.0,
+          point: point,
+          child: const Icon(Icons.location_on, color: Colors.red, size: 40.0),
+        ),
+      );
+    });
+    getroute(point);
+    return point;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,19 +156,19 @@ class _ChargingStationPageState extends State<StationScreen> {
               fontSize: 30,
               fontWeight: FontWeight.w400),
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 127, 230),
+        backgroundColor: Colors.indigo,
       ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Color.fromARGB(255, 0, 127, 230),
-          Color.fromARGB(255, 51, 192, 8),
+          Colors.grey,
+          Colors.black54,
         ])),
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               // صورة المحطة
               Container(
@@ -128,13 +233,75 @@ class _ChargingStationPageState extends State<StationScreen> {
                   onTap: () => _selectDate(context),
                 ),
               ),
+              Center(
+                child: Expanded(
+                  child: Container(
+                    height: 300,
+                    width: 300,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Scaffold(
+                          body: currentlocation == null
+                              ? const Center(child: CircularProgressIndicator())
+                              : FlutterMap(
+                                  mapController: mapController,
+                                  options: MapOptions(
+                                    initialCenter: LatLng(
+                                        currentlocation!.latitude!,
+                                        currentlocation!.longitude!),
+                                    initialZoom: 15.0,
+                                    onTap: (tapPosition, point) =>
+                                        location_station =LatLng(0, 0)
+                                           
+                                  ),
+                                  children: [
+                                    TileLayer(
+                                      urlTemplate:
+                                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                      subdomains: const ['a', 'b', 'c'],
+                                    ),
+                                    MarkerLayer(
+                                      markers: markers,
+                                    ),
+                                    PolylineLayer(
+                                      polylines: [
+                                        Polyline(
+                                          points: routpoints,
+                                          strokeWidth: 4.0,
+                                          color: Colors.blue,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                          floatingActionButton: FloatingActionButton(
+                            backgroundColor: Colors.white,
+                            onPressed: () {
+                              if (currentlocation != null) {
+                                mapController.move(
+                                  LatLng(currentlocation!.latitude!,
+                                      currentlocation!.longitude!),
+                                  15.0,
+                                );
+                              }
+                            },
+                            child: const Icon(
+                              Icons.my_location,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+              ),
 
               // اختيار الوقت
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
                   'اختر فترة زمنية:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               GridView.builder(
@@ -176,7 +343,7 @@ class _ChargingStationPageState extends State<StationScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      backgroundColor: const Color.fromARGB(255, 0, 127, 230),
+                      backgroundColor: Colors.indigo,
                     ),
                     onPressed: () {
                       if (selectedDate != null && selectedTimeSlot != null) {

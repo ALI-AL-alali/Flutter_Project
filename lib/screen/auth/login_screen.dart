@@ -194,8 +194,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   colors: [
-                    Color.fromARGB(255, 0, 127, 230),
-                    Color.fromARGB(255, 51, 192, 8),
+                    Colors.indigo,
+              const Color.fromARGB(255, 0, 127, 230),
                   ],
                 ),
               ),
@@ -354,7 +354,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Title: _isLoading
                                       ? 'جاري التحميل...'
                                       : 'تسجيل الدخول',
-                                  color: const Color.fromARGB(255, 51, 192, 8),
+                                  color: Colors.indigo,
                                   onPressed:
                                       _login, //Api وقت افعل ال _login لازم اكتب هون
                                 ),
