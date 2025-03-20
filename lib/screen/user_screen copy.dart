@@ -1,5 +1,3 @@
-
-
 import 'package:ev_power/widgets/card.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +15,7 @@ class _UserScreenState extends State<UserScreen> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.white,
-          selectedItemColor:  Colors.indigo,
+          selectedItemColor: Colors.indigo,
           currentIndex: currten,
           onTap: (value) {
             setState(() {
@@ -25,9 +23,9 @@ class _UserScreenState extends State<UserScreen> {
             });
           },
           selectedFontSize: 20,
-          items: [
+          items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: "صفحة الرئيسية"),
+                icon: Icon(Icons.home), label: "الصفحة الرئيسية"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_2), label: "الملف الشخصي"),
           ]),
@@ -35,7 +33,7 @@ class _UserScreenState extends State<UserScreen> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Container(height: 10, child: Image.asset('images/ev.png')),
+          child: SizedBox(height: 10, child: Image.asset('images/ev.png')),
         ),
         centerTitle: true,
         title: const Text(
@@ -69,44 +67,51 @@ class _UserScreenState extends State<UserScreen> {
                           itemCount: 1,
                           itemBuilder: (context, index) {
                             return Column(children: [
-                              Container(
+                              SizedBox(
                                 height: 200,
                                 child: Card2(
                                   text: 'حالةالحجز',
                                   asset: 'asset/11.json',
                                   f: () {
                                     Navigator.pushNamed(
-                                        context, 'account_scren');
+                                        context, 'account_screen');
                                   },
                                   color1: Colors.indigo,
-                                  color2: Colors.black,suptitle: "استمتع بخاصية مراجعة حالة الحجز الخاص بك بكل يسر وسهولة مع معرفة التوقيت والتاريخ بدقة",
-                                anmaition:true ,),
+                                  color2: Colors.black,
+                                  suptitle:
+                                      "استمتع بخاصية مراجعة حالة الحجز الخاص بك بكل يسر وسهولة مع معرفة التوقيت والتاريخ بدقة",
+                                  anmaition: true,
+                                ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 200,
                                 child: Card2(
-                                  text: 'محطات الشحن',
-                                  asset: 'asset/station.json',
-                                  f: () {
-                                    Navigator.pushNamed(
-                                        context, 'account_scren');
-                                  },
-                                  color1: Colors.indigo,
-                                  color2: Colors.black,suptitle: "اختيار وحجز محظة الشحن المفضلة لك بسهولة ويسر",
-                                anmaition:true  ),
+                                    text: 'محطات الشحن',
+                                    asset: 'asset/station.json',
+                                    f: () {
+                                      Navigator.pushNamed(
+                                          context, 'select_stations_screen');
+                                    },
+                                    color1: Colors.indigo,
+                                    color2: Colors.black,
+                                    suptitle:
+                                        "اختيار وحجز محظة الشحن المفضلة لك بسهولة ويسر",
+                                    anmaition: true),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 200,
                                 child: Card2(
-                                  text: 'حالة طارئة',
-                                  asset: 'asset/22.json',
-                                  f: () {
-                                    Navigator.pushNamed(
-                                        context, 'account_scren');
-                                  },
-                                  color1:  Colors.indigo,
-                                  color2: Colors.black,suptitle: "تعرف على كيفية التعامل  مع حالات الطورئ لشحن السيارات الكهربائية أثناء السفر",
-                               anmaition:true   ),
+                                    text: 'حالة طارئة',
+                                    asset: 'asset/22.json',
+                                    f: () {
+                                      Navigator.pushNamed(
+                                          context, 'user_screen');
+                                    },
+                                    color1: Colors.indigo,
+                                    color2: Colors.black,
+                                    suptitle:
+                                        "تعرف على كيفية التعامل  مع حالات الطورئ لشحن السيارات الكهربائية أثناء السفر",
+                                    anmaition: true),
                               ),
 
                               // Mycard('محطات الشحن', 'asset/station.json', () {

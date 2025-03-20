@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   begin: Alignment.topCenter,
                   colors: [
                     Colors.indigo,
-              const Color.fromARGB(255, 0, 127, 230),
+                   Color.fromARGB(255, 0, 127, 230),
                   ],
                 ),
               ),
@@ -375,7 +375,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.only(top: 20),
                 child: const Center(
                     child: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 2, 207, 9),
+                  color: Color.fromARGB(255, 9, 2, 207),
                 )),
               ),
           ],

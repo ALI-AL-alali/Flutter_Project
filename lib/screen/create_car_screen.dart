@@ -123,7 +123,7 @@ class _CreatCarScreenState extends State<CreatCarScreen> {
                   begin: Alignment.topCenter,
                   colors: [
                     Color.fromARGB(255, 0, 127, 230),
-                    Color.fromARGB(255, 51, 192, 8),
+                    Colors.indigo,
                   ],
                 ),
               ),
@@ -138,11 +138,11 @@ class _CreatCarScreenState extends State<CreatCarScreen> {
                           child: Image.asset('images/1.png'),
                         ),
                         const Text(
-                          'هيا نضيف  معلومات سيارتك',
+                          'هيا نضيف معلومات سيارتك',
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],

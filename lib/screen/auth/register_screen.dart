@@ -101,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        backgroundColor:Colors.indigo,
+        backgroundColor: Colors.indigo,
       ),
       body: WillPopScope(
         onWillPop: _onBackPressed,
@@ -110,10 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
-              colors: [
-                Colors.indigo,
-              const Color.fromARGB(255, 0, 127, 230)
-              ],
+              colors: [Colors.indigo,  Color.fromARGB(255, 0, 127, 230)],
             ),
           ),
           child: Form(
@@ -123,15 +120,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Column(
                   children: [
                     SizedBox(
-                      height: 250,
+                      height: 230,
                       child: Lottie.asset('asset/user.json'),
                     ),
                     const Text(
                       'هيا نبدأ بإنشاء حسابك',
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -229,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 Title: _isLoading
                                     ? 'جاري التحميل...'
                                     : 'تسجيل الدخول',
-                                color:Colors.indigo,
+                                color: Colors.indigo,
                                 onPressed: _register),
                             if (_isLoading)
                               const Padding(

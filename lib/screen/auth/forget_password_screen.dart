@@ -81,7 +81,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             begin: Alignment.topCenter,
             colors: [
               Color.fromARGB(255, 0, 127, 230),
-              Color.fromARGB(255, 51, 192, 8),
+              Colors.indigo,
             ],
           ),
         ),

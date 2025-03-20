@@ -9,7 +9,8 @@ class Card2 extends StatelessWidget {
     super.key,
     required this.color1,
     required this.color2,
-    required this.suptitle, required this.anmaition,
+    required this.suptitle,
+    required this.anmaition,
   });
   final String text;
   final String asset;
@@ -35,9 +36,16 @@ class Card2 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    
-                    child:anmaition==true? Lottie.asset(asset): ClipRRect(borderRadius: BorderRadius.circular(100), child: Image.asset(asset,fit: BoxFit.cover,width: 150,height: 150,))
-                  ),
+                      child: anmaition == true
+                          ? Lottie.asset(asset)
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.asset(
+                                asset,
+                                fit: BoxFit.cover,
+                                width: 150,
+                                height: 150,
+                              ))),
                   Expanded(
                     child: Wrap(
                         runAlignment: WrapAlignment.center,
@@ -51,7 +59,7 @@ class Card2 extends StatelessWidget {
                                 Text(
                                   text,
                                   textDirection: TextDirection.rtl,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
                                   ),
@@ -59,13 +67,13 @@ class Card2 extends StatelessWidget {
                                 Text(
                                   suptitle,
                                   textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
+                                  style: const TextStyle(
+                                      fontSize: 13, color: Colors.white),
                                 )
                               ])
                         ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   )
                 ]),

@@ -8,7 +8,6 @@ import 'package:ev_power/screen/create_car_screen.dart';
 import 'package:ev_power/screen/auth/login_screen.dart';
 import 'package:ev_power/screen/select_car_screen.dart';
 import 'package:ev_power/screen/user_screen%20copy.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import "package:get/get.dart";
@@ -39,13 +38,14 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //
-        initialRoute: token == null ? 'login_screen' : 'user_screen',
+        initialRoute: 'select_stations_screen',
+        // token == null ? 'login_screen' : 'user_screen',
         routes: {
-          'login_screen': (context) =>  SelectStatiosScreen(),
+          'login_screen': (context) => const LoginScreen(),
           'register_screen': (context) => const RegisterScreen(),
           'user_screen': (context) => const UserScreen(),
-          'stationscreen': (context) => const StationScreen(),
           'select_stations_screen': (context) => SelectStatiosScreen(),
+          'station_screen': (context) => const StationScreen(),
           'create_car_screen': (context) => const CreatCarScreen(),
           'select_car_screen': (context) => const SelectcarScreen(),
           'account_screen': (context) => const AccountScreen(),
